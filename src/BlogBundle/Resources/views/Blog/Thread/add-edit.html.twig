@@ -131,7 +131,10 @@
     <script>
         // setup an "add a tag" link
         var $addTagLink = $('<a href="#" class="add_tag_link">Add Reply</a>');
-        var $newLinkLi = $('<li></li>').append($addTagLink);
+        var $newLinkLi = $('<div class="form-group">
+                                <div class="col-sm-offset-1 col-sm-10">
+                                </div>
+                            </div>').append($addTagLink);
 
         jQuery(document).ready(function () {
             // Get the ul that holds the collection of tags
