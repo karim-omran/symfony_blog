@@ -1,0 +1,162 @@
+{# /BlogBundle/Resources/views/Blog/Category/add-edit.html.twig #}
+
+{#{% extends "BlogBundle:Templates:index_layout.html.twig" %}
+
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            {{ form_start(catForm, {'method': 'POST', 'action': path('add_edit_category'),
+                             'attr': {'novalidate': 'novalidate', 'class' : 'form-horizontal'}}) }}
+
+            <div class="form-group">
+                <div class="col-sm-offset-1 col-sm-10">
+
+
+                    {{ form_label(catForm.name, '',{ 'label_attr': {'class': 'col-sm-1 control-label'} }) }}
+                    <div class="col-sm-5">
+                        {{ form_widget(catForm.name, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    {{ form_errors(catForm.name) }}
+
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    {{ form_widget(catForm.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+                </div>
+            </div>
+            {{ form_end(catForm) }}
+
+        </div>
+
+    </div>
+</div>
+
+
+{% endblock %}#}
+
+{% extends editFlag ? 'BlogBundle:Templates:index_layout.html.twig' 
+                                    : 'BlogBundle:Templates:empty.html.twig' %}
+
+
+{% block content %}
+
+    {% if app.user and ( is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_ADMIN') ) %}
+        {% if editFlag %}
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12 col-sm-offset-1 col-sm-10">
+                        <h1 class="page-header">
+                            Edit Category
+                        </h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        {{ form_start(catForm, {'method': 'POST', 'action': path('save_category', {'categoryId': categoryId }),
+                             'attr': {'novalidate': 'novalidate', 'class' : 'form-horizontal'}}) }}
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-1 col-sm-10">
+
+
+                                {{ form_label(catForm.name, '',{ 'label_attr': {'class': 'col-sm-1 control-label'} }) }}
+                                <div class="col-sm-5">
+                                    {{ form_widget(catForm.name, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                                {{ form_errors(catForm.name) }}
+
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-1 col-sm-10">
+
+
+                                {{ form_label(catForm.description, '',{ 'label_attr': {'class': 'col-sm-1 control-label'} }) }}
+                                <div class="col-sm-5">
+                                    {{ form_widget(catForm.description, {'attr': {'class': 'form-control', 'style' : 'width:100%; max-width: 100%;'}}) }}
+                                </div>
+                                {{ form_errors(catForm.description) }}
+
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                {{ form_widget(catForm.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+                            </div>
+                        </div>
+                        {{ form_end(catForm) }}
+
+                    </div>
+
+                </div>
+            </div>
+
+        {% elseif not editFlag %}
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Add Category
+                        </h1>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="panel panel-default">
+                            {{ form_start(catForm, {'method': 'POST', 'action': path('save_category'),
+                             'attr': {'novalidate': 'novalidate', 'class' : 'form-horizontal'}}) }}
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <div class="col-sm-10">
+                                        {{ form_label(catForm.name, '',{ 'label_attr': { } }) }}
+                                        {{ form_widget(catForm.name, {'attr': { }}) }}
+                                        {{ form_errors(catForm.name) }}
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-16">
+                                        {{ form_label(catForm.description, '',{ 'label_attr': { } }) }}
+                                        {{ form_widget(catForm.description, {'attr': {'style' : 'width:100%; max-width: 100%;' }}) }}
+                                        {{ form_errors(catForm.description) }}
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        {{ form_widget(catForm.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            {{ form_end(catForm) }}
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        {% endif %}
+
+    {% endif %}
+{% endblock %}
+
+

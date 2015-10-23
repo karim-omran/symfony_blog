@@ -1,0 +1,112 @@
+{# /BlogBundle/Resources/views/Blog/Forum/add-edit.html.twig #}
+
+{% extends editFlag ? 'BlogBundle:Templates:index_layout.html.twig' 
+                                    : 'BlogBundle:Templates:empty.html.twig' %}
+
+{% block content %}
+
+    {% if app.user and ( is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_ADMIN') ) %}
+
+        {% if editFlag %}
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12 col-sm-offset-1 col-sm-10">
+                        <h1 class="page-header">
+                            Edit Forum
+                        </h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        {{ form_start(forumForm, {'method': 'POST', 'action': path('save_forum', {'categoryId' : categoryId, 'forumId': forumId }),
+                             'attr': {'novalidate': 'novalidate', 'class' : 'form-horizontal'}}) }}
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-1 col-sm-10">
+
+
+                                {{ form_label(forumForm.name, '',{ 'label_attr': {'class': 'col-sm-1 control-label'} }) }}
+                                <div class="col-sm-5">
+                                    {{ form_widget(forumForm.name, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                                {{ form_errors(forumForm.name) }}
+
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-1 col-sm-10">
+
+
+                                {{ form_label(forumForm.description, '',{ 'label_attr': {'class': 'col-sm-1 control-label'} }) }}
+                                <div class="col-sm-5">
+                                    {{ form_widget(forumForm.description, {'attr': {'class': 'form-control', 'style' : 'width:100%; max-width: 100%;'}}) }}
+                                </div>
+                                {{ form_errors(forumForm.description) }}
+
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-1 col-sm-10">
+
+
+                                {{ form_label(forumForm.closed, '',{ 'label_attr': {'class': 'col-sm-1 control-label'} }) }}
+                                <div class="col-sm-1">
+                                    {{ form_widget(forumForm.closed, {'attr': {'class': 'form-control', 'style' : 'width:100%; max-width: 100%;'}}) }}
+                                </div>
+                                {{ form_errors(forumForm.closed) }}
+
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                {{ form_widget(forumForm.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+                            </div>
+                        </div>
+                        {{ form_end(forumForm) }}
+
+                    </div>
+
+                </div>
+            </div>
+        {% elseif not editFlag %}
+
+            {{ form_start(forumForm, {'method': 'POST', 'action': path('save_forum', {'categoryId' : categoryId, 'forumId': forumId }),
+                             'attr': {'novalidate': 'novalidate', 'class' : 'form-horizontal'}}) }}
+
+            <tr >
+                <td>
+
+                </td>
+                <td>
+                    {{ form_widget(forumForm.name, {'attr': { }}) }}
+                </td>
+                <td>
+
+                </td>
+                <td>
+                    {{ form_widget(forumForm.description, {'attr': { }}) }}
+                </td>
+                <td>
+                    {{ form_widget(forumForm.closed, {'attr': { }}) }}        
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {{ form_widget(forumForm.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+                </td>
+            </tr>
+
+
+            {{ form_end(forumForm) }}
+
+        {% endif %}
+
+    {% endif %}
+
+{% endblock %}

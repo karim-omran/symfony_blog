@@ -1,0 +1,64 @@
+blog_homepage:
+    path:     /hello
+    defaults: { _controller: BlogBundle:Default:index }
+
+# ================================ Category =============================
+
+add_edit_category:
+    path:     /blog/category/add-edit/{categoryId}
+    defaults: { _controller: BlogBundle:Category:addEdit , categoryId : NULL}
+    methods:  ['GET','POST']
+    
+view_category:
+    path:     /blog/category/view/{categoryId}
+    defaults: { _controller: BlogBundle:Category:view , categoryId : NULL}
+    methods:  ['GET','POST']
+    
+save_category:
+    path:     /blog/category/save/{categoryId}
+    defaults: { _controller: BlogBundle:Category:save , categoryId : NULL}
+    methods:  ['POST']
+    
+remove_category:
+    path:     /blog/category/remove/{categoryId}
+    defaults: { _controller: BlogBundle:Category:remove , categoryId : NULL}
+    methods:  ['GET']
+    
+# ================================ Forum =============================
+
+add_edit_forum:
+    path:     /blog/forum/add-edit/{categoryId}/{forumId}
+    defaults: { _controller: BlogBundle:Forum:addEdit , categoryId : NULL, forumId : NULL}
+    methods:  ['GET','POST']
+    
+view_forum:
+    path:     /blog/forum/view/{categoryId}
+    defaults: { _controller: BlogBundle:Forum:view , categoryId : NULL}
+    methods:  ['GET','POST']
+    
+save_forum:
+    path:     /blog/forum/save/{categoryId}/{forumId}
+    defaults: { _controller: BlogBundle:Forum:save , categoryId : NULL, forumId : NULL}
+    methods:  ['POST']
+    
+remove_forum:
+    path:     /blog/forum/remove/{categoryId}/{forumId}
+    defaults: { _controller: BlogBundle:Forum:remove , categoryId : NULL, forumId : NULL}
+    methods:  ['GET']
+    
+# ================================ Threads =============================
+
+view_forum_threads:
+    path:     /blog/threads/view/{forumId}
+    defaults: { _controller: BlogBundle:Thread:view , forumId : NULL}
+    methods:  ['GET','POST']
+    
+add_thread:
+    path:     /blog/threads/add/{forumId}
+    defaults: { _controller: BlogBundle:Thread:add, forumId : NULL}
+    methods:  ['GET','POST']
+    
+edit_thread:
+    path:     /blog/threads/edit/{forumId}/{threadId}
+    defaults: { _controller: BlogBundle:Thread:edit, forumId : NULL, threadId : NULL}
+    methods:  ['GET','POST']
