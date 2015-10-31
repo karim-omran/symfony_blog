@@ -1,0 +1,17 @@
+{# /src/BlogBundle/Resources/views/Blog/Thread/thread-prototype.html.twig #}
+
+{#{% for reply in threadForm.repliesList %}#}
+    <div class="form-group">
+        <div class="col-sm-offset-1 col-sm-10">
+
+
+            {{ form_label(threadForm.body, '',{ 'label_attr': {'class': 'col-sm-1 control-label'} }) }}
+            <div class="col-sm-4">
+                {{ form_widget(threadForm.body, {'attr': {'class': 'form-control', 'style' : 'max-width=100%'}}) }}
+            </div>
+            <div class="col-sm-4">
+                {{ form_errors(threadForm.body) }}
+            </div>
+        </div>
+    </div>
+{#{% endfor %}#}

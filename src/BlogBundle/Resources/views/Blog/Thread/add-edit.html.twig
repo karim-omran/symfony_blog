@@ -4,126 +4,137 @@
 
 {% block content %}
 
-    <div class="container-fluid">
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
 
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header">
-                    Thread
-                </h1>
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">
+                        Thread
+                    </h1>
+                </div>
             </div>
-        </div>
 
 
-        {% if editFlag %} 
-            {{ form_start(threadForm, {'method': 'POST', 'action': path('edit_thread', {'forumId' : forumId, 'threadId' : threadId, }), 'attr': {'novalidate': 'novalidate'}}) }}
-        {% elseif not editFlag %} 
-            {{ form_start(threadForm, {'method': 'POST', 'action': path('add_thread', {'forumId' : forumId, }), 'attr': {'novalidate': 'novalidate'}}) }}
-        {% endif %}
+            {% if editFlag %} 
+                {{ form_start(threadForm, {'method': 'POST', 'action': path('edit_thread', {'forumId' : forumId, 'threadId' : threadId, }), 'attr': {'novalidate': 'novalidate'}}) }}
+            {% elseif not editFlag %} 
+                {{ form_start(threadForm, {'method': 'POST', 'action': path('add_thread', {'forumId' : forumId, }), 'attr': {'novalidate': 'novalidate'}}) }}
+            {% endif %}
 
-        <div class="row">
-            <div class="col-md-12">
-
-
-
-                <div class="form-group">
-                    <div class="col-sm-offset-1 col-sm-10">
+            <div class="row">
+                <div class="col-md-12">
 
 
-                        {{ form_label(threadForm.title, '',{ 'label_attr': {'class': 'col-sm-1 control-label'} }) }}
-                        <div class="col-sm-5">
-                            {{ form_widget(threadForm.title, {'attr': {'class': 'form-control', 'style' : 'max-width=100%'}}) }}
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-1 col-sm-10">
+
+
+                            {{ form_label(threadForm.title, '',{ 'label_attr': {'class': 'col-sm-1 control-label'} }) }}
+                            <div class="col-sm-5">
+                                {{ form_widget(threadForm.title, {'attr': {'class': 'form-control', 'style' : 'max-width=100%'}}) }}
+                            </div>
+                            <div class="col-sm-5">
+                                {{ form_errors(threadForm.title,{ 'attr': {'class': 'col-sm-1 control-label'} }) }}
+                            </div>
+
                         </div>
-                        <div class="col-sm-5">
-                            {{ form_errors(threadForm.title,{ 'attr': {'class': 'col-sm-1 control-label'} }) }}
-                        </div>
-
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <div class="col-sm-offset-1 col-sm-10">
+                    <div class="form-group">
+                        <div class="col-sm-offset-1 col-sm-10">
 
 
-                        {{ form_label(threadForm.body, '',{ 'label_attr': {'class': 'col-sm-1 control-label'} }) }}
-                        <div class="col-sm-5">
-                            {{ form_widget(threadForm.body, {'attr': {'class': 'form-control', 'style' : 'max-width=100%'}}) }}
+                            {{ form_label(threadForm.body, '',{ 'label_attr': {'class': 'col-sm-1 control-label'} }) }}
+                            <div class="col-sm-5">
+                                {{ form_widget(threadForm.body, {'attr': {'class': 'form-control', 'style' : 'max-width=100%'}}) }}
+                            </div>
+                            <div class="col-sm-5">
+                                {{ form_errors(threadForm.body) }}
+                            </div>
+
                         </div>
-                        <div class="col-sm-5">
-                            {{ form_errors(threadForm.body) }}
-                        </div>
-
                     </div>
-                </div>
 
 
-                <div class="form-group">
-                    <div class="col-sm-offset-1 col-sm-10">
+                    <div class="form-group">
+                        <div class="col-sm-offset-1 col-sm-10">
 
-                        {{ form_label(threadForm.sticky, '',{ 'label_attr': {'class': 'col-sm-1 control-label'} }) }}
-                        <div class="col-sm-5">
-                            {{ form_widget(threadForm.sticky, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_label(threadForm.sticky, '',{ 'label_attr': {'class': 'col-sm-1 control-label'} }) }}
+                            <div class="col-sm-5">
+                                {{ form_widget(threadForm.sticky, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                            <div class="col-sm-5">
+                                {{ form_errors(threadForm.sticky) }}
+                            </div>
+
                         </div>
-                        <div class="col-sm-5">
-                            {{ form_errors(threadForm.sticky) }}
-                        </div>
-
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <div class="col-sm-offset-1 col-sm-10">
+                    <div class="form-group">
+                        <div class="col-sm-offset-1 col-sm-10">
 
-                        {{ form_label(threadForm.closed, '',{ 'label_attr': {'class': 'col-sm-1 control-label'} }) }}
-                        <div class="col-sm-5">
-                            {{ form_widget(threadForm.closed, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_label(threadForm.closed, '',{ 'label_attr': {'class': 'col-sm-1 control-label'} }) }}
+                            <div class="col-sm-5">
+                                {{ form_widget(threadForm.closed, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                            <div class="col-sm-5">
+                                {{ form_errors(threadForm.closed) }}
+                            </div>
+
                         </div>
-                        <div class="col-sm-5">
-                            {{ form_errors(threadForm.closed) }}
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1 class="page-header">
+                                Replies
+                            </h1>
                         </div>
-
                     </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">
-                            Replies
-                        </h1>
-                    </div>
-                </div>
 
 
-                <div class="row replies-row" data-prototype="{{ form_widget(threadForm.repliesList.vars.prototype)|e }}">
-                    {% for reply in threadForm.repliesList %}
-                        <div class="form-group">
-                            <div class="col-sm-offset-1 col-sm-10">
+                    <div class="row replies-row" data-prototype="{{ form_widget(threadForm.repliesList.vars.prototype) | e }}">
+
+                        {% for reply in threadForm.repliesList %}
+                            <div class="form-group">
+                                <div class="col-sm-offset-1 col-sm-10">
 
 
-                                {{ form_label(reply.body, '',{ 'label_attr': {'class': 'col-sm-1 control-label'} }) }}
-                                <div class="col-sm-5">
-                                    {{ form_widget(reply.body, {'attr': {'class': 'form-control', 'style' : 'max-width=100%'}}) }}
-                                </div>
-                                <div class="col-sm-5">
-                                    {{ form_errors(reply.body) }}
+                                    {{ form_label(reply.body, '',{ 'label_attr': {'class': 'col-sm-1 control-label'} }) }}
+                                    <div class="col-sm-4">
+                                        {{ form_widget(reply.body, {'attr': {'class': 'form-control', 'style' : 'max-width=100%'}}) }}
+                                    </div>
+                                    <div class="col-sm-4">
+                                        {{ form_errors(reply.body) }}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    {% endfor %}
-                </div>
+                        {% endfor %}
 
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="col-sm-5">
-                            {{ form_widget(threadForm.save, {'attr': {'class': 'btn btn-primary'}}) }}
+                    </div>
+
+
+                    {#                <div class="row replies-row" data-prototype="{% filter escape %}{% include 'BlogBundle:Blog\\Thread:thread-prototype.html.twig' with {'threadForm': threadForm.repliesList.vars.prototype} %}{% endfilter %}">#}
+
+                    {#                </div>#}
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="col-sm-5">
+                                {{ form_widget(threadForm.save, {'attr': {'class': 'btn btn-primary'}}) }}
+                            </div>
                         </div>
                     </div>
-                </div>
 
+                </div>
             </div>
+            {{ form_end(threadForm) }}
         </div>
-        {{ form_end(threadForm) }}
-    </div>
+
+    {% endif %}
 
 {% endblock %}
 
@@ -131,10 +142,7 @@
     <script>
         // setup an "add a tag" link
         var $addTagLink = $('<a href="#" class="add_tag_link">Add Reply</a>');
-        var $newLinkLi = $('<div class="form-group">
-                                <div class="col-sm-offset-1 col-sm-10">
-                                </div>
-                            </div>').append($addTagLink);
+        var $newLinkLi = $('<div class="form-group"><div class="col-sm-offset-1 col-sm-10"></div></div>').append($addTagLink);
 
         jQuery(document).ready(function () {
             // Get the ul that holds the collection of tags
@@ -142,7 +150,7 @@
 
 
             // add a delete link to all of the existing tag form li elements
-            $collectionHolder.find('li').each(function () {
+            $collectionHolder.find('.col-sm-offset-1 col-sm-10').each(function () {
                 addTagFormDeleteLink($(this));
             });
 
@@ -159,12 +167,12 @@
                 e.preventDefault();
 
                 // add a new tag form (see next code block)
-                addAreaForm($collectionHolder, $newLinkLi);
+                addReplyForm($collectionHolder, $newLinkLi);
             });
         });
 
 
-        function addAreaForm($collectionHolder, $newLinkLi) {
+        function addReplyForm($collectionHolder, $newLinkLi) {
             // Get the data-prototype explained earlier
             var prototype = $collectionHolder.data('prototype');
 
@@ -179,7 +187,7 @@
             $collectionHolder.data('index', index + 1);
 
             // Display the form in the page in an li, before the "Add a tag" link li
-            var $newFormLi = $('<li></li>').append(newForm);
+            var $newFormLi = $('<div class="form-group"><div class="col-sm-offset-1 col-sm-10"></div></div>').append(newForm);
             $newLinkLi.before($newFormLi);
 
             // add a delete link to the new form
